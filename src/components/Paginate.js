@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Games.module.css";
+import paginate from "./Paginate.module.css";
 import Pagination from 'react-bootstrap/Pagination';
 
 const MAX_ITEMS = 7;
@@ -30,7 +30,7 @@ const Paginate = ({ limit, total, pagina, pai }) => {
     };
 
     return(
-        <Pagination className={styles.paginate}>
+        <Pagination className={paginate.paginate}>
                 <Pagination.First onClick={() => onclick(first)} />
                 <Pagination.Prev  onClick={() => onclick(pagina - 1)} />
             {                                

@@ -1,181 +1,62 @@
-.navbar {
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    width: 100%;
-    z-index: -1;
-  }
-  
-.navbar a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-.navbar a:hover {
-    background: #ddd;
-    color: black;
-}
-
-.row_nav {
-    margin-bottom: 30px;
-}
-
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-}
-
-.main {
-    float: left;
-    margin-top: 60px;
-    height: max-content;
-    overflow:auto;
-}
-
-.cards {
-    width: 100%;
-    /*height: 48vmax;*/
-    height: 25rem;
-    margin-top: 5px;    
-    cursor: pointer;
-}
-
-.cards_img {
-    width: 100%;
-    height: 60%;
-    margin-top: 1px;
-}
-
-.cards_text {
-    /*height: 55%;*/
-}
-
-.botao {
-    position: absolute;
-    bottom: 0;
-}
-
-.principal {
-    width: 100%;
-    justify-content: center !important;
-    align-items: center;    
-}
-
-.div_games {
-    margin-top: 0px;
-    position: absolute;
-    overflow: auto;
-    height: 83vh;    
-}
-
-.pagination {
+.div_container {
     width: 100%;
 }
 
-.paginate {
-    justify-content: center !important;
-    align-items: center;
-}
-
-.page_link {
-    background-color: brown;
-}
-
-.lista_ul {
-    display: flex;
-    list-style: none;
-}
-
-.lista_ul li + li {
-    margin-left: 0.5rem;
-}
-
-.lista_ul__item__active {
-    background: none;
-    font-weight: bold;
-    border: none;
-}
-
-.brand {
-    font-family: 'Rowdies';
+.div_game {
+    width: 20%;
+    float: left;    
 }
 
 .img_game {
-   width: 40%;
-   top: 0;
-}
-
-@media screen and (max-width: 480px) {
-    .img_game {
-        width: 100%;
-    }
-  }
-
-.div_game_detail {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 10rem;
 }
 
-.div_game_img {
+.div_body {
+    /*esse estilo faz com que a lista role e a barra de pesquisa e paginação fiquem fixas*/
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    overflow: auto;
+    margin-top: 0px;
+    position: absolute;
+    height: 80vh; 
 }
 
-.div_container {
-    background-color: #333;
-    height: 100vh;
-    background-image: url(../images/last_of_us_3.jpg);
-    background-size: 100% 100%;
-}
-
-.div_game_description {
-    background-color: white;
-    width: 40%;
-    height: 42vh;
-    padding: 5px;
-    text-align: justify;
-    font-size: 14px;
+.div_topo {
+    top: 0;
     overflow: auto;
 }
 
-@media screen and (max-width: 480px) {
-    .div_game_description {
-        width: 100%;
-        height: 55vh;
-        overflow: auto;
-    }
-  }
-
-.div_voltar {
-    
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.cards {
+    cursor: pointer;
+    font-size: 10px;
+    height: 18rem;
 }
 
-.botao_voltar {
-    width: 40%;
-    height: 10vh;
-    background-color: darkslategray;
-    color: white;
-    font-size: 20px;
-    border: 0;
+.titulo_game {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cards_text {
+    font-size: 12px;
 }
 
 @media screen and (max-width: 480px) {
-    .botao_voltar {
-        width: 100%;
-        height: 10vh;
+    .div_game {
+        width: 100%;  
+        padding-right: 1px;      
     }
-  }
+
+    .img_game {
+        width: 100%;
+        height: 27vh;
+    }
+
+    .cards {
+        height: 23rem;
+    }
+
+    .cards_text {
+        font-size: 14px;
+    }
+}

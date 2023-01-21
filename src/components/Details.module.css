@@ -1,0 +1,69 @@
+.div_container {
+    background-color: #333;
+    height: 100vh;
+    background-image: url(../images/last_of_us_3.jpg);
+    background-size: 100% 100%;
+}
+
+.div_game_img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_game {
+    width: 40%;
+    top: 0;
+ }
+ 
+.div_game_detail {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_game_description {
+    background-color: white;
+    width: 40%;
+    height: 42vh;
+    padding: 5px;
+    text-align: justify;
+    font-size: 14px;
+    overflow: auto;
+}
+
+.div_voltar {
+    
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao_voltar {
+    width: 40%;
+    height: 10vh;
+    background-color: darkslategray;
+    color: white;
+    font-size: 20px;
+    border: 0;
+}
+
+@media screen and (max-width: 480px) {
+    .img_game {
+        width: 100%;
+    }
+
+    .div_game_description {
+        width: 100%;
+        height: 55vh;
+        overflow: auto;
+    }
+
+    .botao_voltar {
+        width: 100%;
+        height: 10vh;
+    }
+}

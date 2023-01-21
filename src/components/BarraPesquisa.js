@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import styles from './Games.module.css'
+import barra from './Barra.module.css'
 
 class BarraPesquisa extends React.Component {
 
@@ -12,7 +12,7 @@ class BarraPesquisa extends React.Component {
         return (
             <Navbar bg="secondary" variant="dark" expand="lg">
             <Container fluid>
-                <Navbar.Brand  href="#"><span className={styles.brand}>TXGamer</span></Navbar.Brand>
+                <Navbar.Brand  href="#"><span className={barra.brand}>TXGamer</span></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                 <Nav

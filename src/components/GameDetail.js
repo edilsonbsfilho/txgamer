@@ -1,6 +1,6 @@
 import React from "react";
 import Loading from "../layout/Loading";
-import styles from "./Games.module.css";
+import details from "./Details.module.css";
 
 class GameDetail extends React.Component {
 
@@ -47,18 +47,18 @@ class GameDetail extends React.Component {
         return(
             <div>
                 { !this.state.removeLoading ? <Loading /> :  
-                <div className={styles.div_container}>
-                    <div className={styles.div_game_img}>
-                        <img src={this.state.game.background_image} className={styles.img_game} />                                            
+                <div className={details.div_container}>
+                    <div className={details.div_game_img}>
+                        <img src={this.state.game.background_image} className={details.img_game} />                                            
                     </div>    
-                    <div className={styles.div_game_detail}>
-                        <div className={styles.div_game_description}>
+                    <div className={details.div_game_detail}>
+                        <div className={details.div_game_description}>
                             <span><h2>{this.state.game.name}</h2></span>
                             {this.state.game.description_raw}
                         </div>
                     </div> 
-                    <div className={styles.div_voltar}>
-                        <button onClick={() => window.location = '/games'} className={styles.botao_voltar}>VOLTAR</button>
+                    <div className={details.div_voltar}>
+                        <button onClick={() => window.location = '/games'} className={details.botao_voltar}>VOLTAR</button>
                     </div>           
                 </div>
                 }

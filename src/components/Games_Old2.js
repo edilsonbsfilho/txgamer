@@ -1,11 +1,14 @@
 import React from "react";
 import { formatDateISO } from "../utils/DateUtils";
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { joinPlatforms } from "../utils/ArrayUtils";
 import Loading from "../layout/Loading";
+import styles from "./Games.module.css";
 import BarraPesquisa from "./BarraPesquisa"
 import Paginate from "./Paginate"
-import estilo from "./Games.module.css";
 
 class Games extends React.Component {
 
@@ -75,46 +78,49 @@ class Games extends React.Component {
               
     }
 
+    renderRow(game, indice) {
+        return (
+            <Col>
+                <Card onClick={() => this.detalharGame(game)} bg="dark" text="white" border="light" 
+                            className={ styles.cards }>
+                    <Card.Header as="h6">{game.name}</Card.Header>
+                    <Card.Img variant="top" src={game.background_image} className={ styles.cards_img } />
+                    <Card.Body>
+                        <Card.Text className={ styles.cards_text }>
+                        Lançamento: {formatDateISO(game.released, 'dd/MM/yyyy')} <br />
+                        Plataformas: {joinPlatforms(game.parent_platforms)}
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Col>
+        )
+    }
+
     render() {
         return (
-            <div className={estilo.div_container}>   
-            { 
-                !this.state.removeLoading ? <Loading /> :  
-                <div className={estilo.div_topo}>
-                <BarraPesquisa ref={this.gamesClassRef} owner={this} /> 
-                    {
-                    this.state.games.count > 0 ?
-                    <Paginate                         
-                        limit={this.limit} 
-                        total={this.state.games.count}
-                        pagina={this.state.pagina}
-                        pai={this} />
+            <div id="games" className={styles.principal}>   
+                { !this.state.removeLoading ? <Loading /> :  <BarraPesquisa ref={this.gamesClassRef} owner={this} /> }
+                
+                <div className={styles.pagination}>
+                    { 
+                    this.state.games.count > 0 && this.state.removeLoading ?
+                        <Paginate                         
+                            limit={this.limit} 
+                            total={this.state.games.count}
+                            pagina={this.state.pagina}
+                            pai={this} />
                     : 
-                    <div></div>
+                        <div></div>
                     }
                 </div>
-            }
-                <div className={estilo.div_body}>
-                { 
-                    this.state.removeLoading ? this.state.games.results.map((game, index) => 
-                    
-                    <div className={estilo.div_game}>                        
-                        <Card onClick={() => this.detalharGame(game)} bg="dark" text="white" border="light" className={estilo.cards} >
-                            <Card.Header><span className={estilo.titulo_game}>{game.name}</span></Card.Header>
-                            <Card.Img variant="top" src={game.background_image} className={ estilo.img_game } />
-                            <Card.Body>
-                                <Card.Text className={ estilo.cards_text }>
-                                Lançamento: {formatDateISO(game.released, 'dd/MM/yyyy')} <br />
-                                Plataformas: {joinPlatforms(game.parent_platforms)}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </div>
 
-                ) : 
-                    <div></div>
-                }
-                </div>    
+                <div className={styles.div_games}>
+                    <Container fluid>
+                        <Row style={{ marginBottom: '5px' }} lg={5} md={3} sm={1}>
+                            { this.state.removeLoading ? this.state.games.results.map((game, index) => this.renderRow(game, index)) : <div></div> }
+                        </Row> 
+                    </Container>    
+                </div>                
             </div>
         )
     }
