@@ -1,6 +1,7 @@
 import React from "react";
 import Loading from "../layout/Loading";
 import details from "./Details.module.css";
+import { traduzir } from "../utils/Tradutor";
 
 class GameDetail extends React.Component {
 
@@ -38,6 +39,7 @@ class GameDetail extends React.Component {
                 //console.log(json)
                 this.setState({ game : json }, () => {
                     this.setState({ removeLoading: true }); 
+                    this.setState({ gameDescription: traduzir(this.state.game.description_raw, this) }); 
                 })
             })
             .catch(err => console.error('error:' + err));
@@ -46,15 +48,16 @@ class GameDetail extends React.Component {
     render() {
         return(
             <div>
-                { !this.state.removeLoading ? <Loading /> :  
+                { !this.state.removeLoading ? <Loading /> :                  
                 <div className={details.div_container}>
+                    <div className={details.div_cabecalho}>TXGamer</div>
                     <div className={details.div_game_img}>
-                        <img src={this.state.game.background_image} className={details.img_game} />                                            
+                        <img alt={this.state.game.name} src={this.state.game.background_image} className={details.img_game} />                                            
                     </div>    
                     <div className={details.div_game_detail}>
                         <div className={details.div_game_description}>
                             <span><h2>{this.state.game.name}</h2></span>
-                            {this.state.game.description_raw}
+                            {this.state.gameDescription}
                         </div>
                     </div> 
                     <div className={details.div_voltar}>
