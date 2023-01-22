@@ -98,7 +98,7 @@ class Games extends React.Component {
                 { 
                     this.state.removeLoading ? this.state.games.results.map((game, index) => 
                     
-                    <div className={estilo.div_game}>                        
+                    <div key={index} className={estilo.div_game}>                        
                         <Card onClick={() => this.detalharGame(game)} bg="dark" text="white" border="light" className={estilo.cards} >
                             <Card.Header><span className={estilo.titulo_game}>{game.name}</span></Card.Header>
                             <Card.Img variant="top" src={game.background_image} className={ estilo.img_game } />

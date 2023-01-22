@@ -35,7 +35,7 @@ class GameDetail extends React.Component {
         fetch(url, options)
             .then(res => res.json())
             .then(json => {       
-                console.log(json)
+                //console.log(json)
                 this.setState({ game : json }, () => {
                     this.setState({ removeLoading: true }); 
                 })
