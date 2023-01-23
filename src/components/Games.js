@@ -8,11 +8,10 @@ import Paginate from "./Paginate"
 import estilo from "./Games.module.css";
 
 class Games extends React.Component {
-
-    index = 0;
+    
     limit = 10;
 
-    constructor(props) {  
+    constructor(props) {
         super(props);
         this.state = {
             games: {
@@ -26,31 +25,27 @@ class Games extends React.Component {
         this.gamesClassRef = React.createRef();
     }
 
-    componentDidMount() {        
-        this.setState({ params: {page: this.state.pagina, page_size:10} }, () => this.navegar(this.state.params))        
+    componentDidMount() {
+        this.fetchGames({ page: this.state.pagina, page_size:10 });
     }
 
-    navegar(params) {
+    fetchGames(params) {
         this.setState({ removeLoading: false })
         
-        var paramsIni = {key:'8d9a455ce43f45deab81052d6ed96521'} 
-        Object.assign(paramsIni, params)
-
-        var url = new URL('https://rawg-video-games-database.p.rapidapi.com/games')
-        url.search = new URLSearchParams(paramsIni).toString();
-
+        const paramsIni = {key:'8d9a455ce43f45deab81052d6ed96521'}; 
         const options = {
             method: 'GET',
             headers: {
-              'X-RapidAPI-Key': 'edaf18dab8msh77b170c8c684a7cp161d4bjsn24b010800b19',
-              'X-RapidAPI-Host': 'rawg-video-games-database.p.rapidapi.com'
+            'X-RapidAPI-Key': 'edaf18dab8msh77b170c8c684a7cp161d4bjsn24b010800b19',
+            'X-RapidAPI-Host': 'rawg-video-games-database.p.rapidapi.com'
             }
-          };
+        };
+        const url = new URL('https://rawg-video-games-database.p.rapidapi.com/games');
+        url.search = new URLSearchParams({...paramsIni, ...params}).toString();
 
         fetch(url, options)
             .then(res => res.json())
             .then(json => {       
-                this.index = 0;     
                 this.setState({ games : json }, () => {
                     //console.log(json)
                     this.setState({ removeLoading: true }); 
@@ -61,7 +56,7 @@ class Games extends React.Component {
 
     detalharGame(game) {
         //console.log(game.id)
-        window.location = "/game-detail?id=" + game.id
+        window.location.href = `/game-detail?id=${game.id}`;
     }
 
     buscarGame(name) {
@@ -69,11 +64,10 @@ class Games extends React.Component {
         this.setState({ name: name })
         this.setState({ pagina: 1 }, () => {
             if (name !== '') {
-                this.setState({ params: {page:this.state.pagina, page_size:10, search:name} }, () => this.navegar(this.state.params))           
+                this.fetchGames({page:this.state.pagina, page_size:10, search:name})           
             }   
-        })            
-              
-    }
+        })  
+    }   
 
     render() {
         return (

@@ -1,31 +1,24 @@
-export const traduzir = (texto, obj) => {
-    obj.setState({ removeLoading: false }); 
-    var arrayTexto = texto.split('.');
-    var textoTraduzido = [];
-    var promises = [];
+export const traduzir = async (texto, obj) => {
+    obj.setState({ removeLoading: false });
+    const arrayTexto = texto.split('.');
+    const textoTraduzido = [];
+    const promises = arrayTexto.map(obter);
 
-    for (var i=0; i<arrayTexto.length; i++) {
-        promises.push(obter(arrayTexto[i]));        
-    }    
+    try {
+        const responses = await Promise.all(promises);
+        responses.map(async response => {
+            const promise = await response.json();
+            if (promise[0] !== undefined) {
+                textoTraduzido.push(promise[0].translations[0].text);
+                obj.setState({ gameDescription: textoTraduzido.join(' ') }, () => { obj.setState({ removeLoading: true }); });
+            }
+        });
+    } catch (err) {
+        console.error('Erro response: ' + err);
+    }
 
-    Promise.all(promises)
-        .then(responses => {            
-            responses
-                .map(response => 
-                        response.json().then(promise => {
-                            if (promise[0] !== undefined){
-                                textoTraduzido.push(promise[0].translations[0].text);  
-                                obj.setState({ gameDescription: textoTraduzido.join(' ') }, () => { obj.setState({ removeLoading: true });});          
-                            }
-                        })
-                        .catch(err => console.error('Erro response: ' + err))
-                    );
-        })
-        .catch(err => console.error('Erro promise.all: ' + err));
-    
     return obj.state.gameDescription;
-
-}
+};
 
 const obter = (text)  => {
     

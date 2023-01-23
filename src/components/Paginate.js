@@ -5,38 +5,19 @@ import Pagination from 'react-bootstrap/Pagination';
 const Paginate = ({ limit, total, pagina, pai }) => {
 
     const pages = Math.ceil(total / limit);
-    var MAX_ITEMS;
-    var MAX_LEFT;
-    var first;
+    const MAX_ITEMS = pagina > 999 ? 3 : pagina > 96 ? 5 : 7;
+    const MAX_LEFT = (MAX_ITEMS - 1) / 2;
+    const first = Math.max(pagina - MAX_LEFT, 1);
     var primeiraPagina = 1;
-
-    //console.log('limit '+limit);
-    //console.log('total '+ typeof total);
-    //console.log('pagina '+pagina);
-
-    if (pagina > 999) {
-        MAX_ITEMS = 3;        
-    } else if (pagina > 96) {
-        MAX_ITEMS = 5
-    } else {
-        MAX_ITEMS = 7;
-    }
-
-    MAX_LEFT = (MAX_ITEMS - 1) / 2;
-    first = Math.max(pagina - MAX_LEFT, 1);
 
     const onclick = (page) => {
         pagina = page;
-        //console.log(page)
         if (page === 0) { page = 1 }
 
         pai.setState({ pagina: page }, () => {
-            var params = { page: pai.state.pagina, page_size: 10 }
-            if (pai.state.name !== '') {
-                Object.assign(params, { search: pai.state.name })
-            }
-            pai.setState({ params: params }, () => 
-                pai.navegar(pai.state.params)) 
+            const params = { page: pai.state.pagina, page_size: 10 };
+            pai.state.name !== '' && Object.assign(params, { search: pai.state.name });            
+            pai.fetchGames(params); 
         })
     };
 
